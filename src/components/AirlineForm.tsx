@@ -86,47 +86,53 @@ export const AirlineForm = ({ destinations }: AirlineFormProps) => {
               <Controller
                 name="tripType"
                 control={form.control}
+                shouldUnregister
                 rules={{ required: "Flight type is required" }}
-                render={({ field }) => (
-                  <>
-                    <RadioGroup
-                      {...field}
-                      className="flex justify-start sm-max:justify-center items-center"
-                    >
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem
-                          className="w-5 h-5"
-                          value="roundtrip"
-                          id="r1"
-                          checked={field.value === "roundtrip"}
-                          onClick={() => field.onChange("roundtrip")}
-                        />
-                        <Label htmlFor="r1">Roundtrip</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem
-                          className="w-5 h-5"
-                          value="one-way"
-                          id="r2"
-                          checked={field.value === "one-way"}
-                          onClick={() => {
-                            field.onChange("one-way");
-                            if (calendar?.date === "to") {
-                              setSelectedDate(null);
-                            }
-                          }}
-                        />
-                        <Label htmlFor="r2">One-way</Label>
-                      </div>
-                      {form.formState.errors.tripType && (
-                        <span className="text-red-500 m-0 p-0 text-sm">
-                          {typeof form.formState.errors.tripType?.message ===
-                            "string" && form.formState.errors.tripType.message}
-                        </span>
-                      )}
-                    </RadioGroup>
-                  </>
-                )}
+                render={({ field }) => {
+                  console.log(field);
+
+                  return (
+                    <>
+                      <RadioGroup
+                        {...field}
+                        className="flex justify-start sm-max:justify-center items-center"
+                      >
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem
+                            className="w-5 h-5"
+                            value="roundtrip"
+                            id="roundtrip"
+                            checked={field.value === "roundtrip"}
+                            onClick={() => field.onChange("roundtrip")}
+                          />
+                          <Label htmlFor="roundtrip">Roundtrip</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem
+                            className="w-5 h-5"
+                            value="one-way"
+                            id="one-way"
+                            checked={field.value === "one-way"}
+                            onClick={() => {
+                              field.onChange("one-way");
+                              if (calendar?.date === "to") {
+                                setSelectedDate(null);
+                              }
+                            }}
+                          />
+                          <Label htmlFor="one-way">One-way</Label>
+                        </div>
+                        {form.formState.errors.tripType && (
+                          <span className="text-red-500 m-0 p-0 text-sm">
+                            {typeof form.formState.errors.tripType?.message ===
+                              "string" &&
+                              form.formState.errors.tripType.message}
+                          </span>
+                        )}
+                      </RadioGroup>
+                    </>
+                  );
+                }}
               />
               <Button
                 type="submit"

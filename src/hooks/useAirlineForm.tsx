@@ -11,7 +11,9 @@ const useAirlineForm = ({ destinations }: AirlineFormProps) => {
   const [calendar, setCalendar] = useState<DatePickerData | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [bookingData, setBookingData] = useState<BookingData | null>(null);
-  const form = useForm<FinalData>();
+  const form = useForm<FinalData>({
+    defaultValues: undefined,
+  });
 
   // Reset selected date when date picker changes
   useEffect(() => {
