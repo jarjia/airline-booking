@@ -115,9 +115,7 @@ const Dropdown = ({
       {errors[location] && (
         <div className="relative mb-4">
           <span className="absolute px-1 text-red-500 rounded-full text-sm font-display">
-            {typeof errors[location]?.message === "string"
-              ? errors[location]?.message
-              : ""}
+            {errors[location]?.message ? (errors[location]?.message as string) : ""}
           </span>
         </div>
       )}

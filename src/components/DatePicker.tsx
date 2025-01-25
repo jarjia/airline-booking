@@ -122,12 +122,10 @@ const DatePicker = ({
           } pointer-events-none placeholder:select-none rounded-2xl w-56 hover:bg-white font-body py-6 px-11 text-center !cursor-pointer !opacity-100 outline-none`}
         />
       </div>
-      {errors[date] && (
+      {errors && errors[date] && (
         <div className="relative mb-4">
           <span className="absolute px-1 text-red-500 rounded-full text-sm font-display">
-            {typeof errors[date]?.message === "string"
-              ? errors[date]?.message
-              : ""}
+            {errors[date]?.message ? (errors[date]?.message as string) : ""}
           </span>
         </div>
       )}
