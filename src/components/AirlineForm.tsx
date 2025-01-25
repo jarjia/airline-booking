@@ -86,53 +86,50 @@ export const AirlineForm = ({ destinations }: AirlineFormProps) => {
               <Controller
                 name="tripType"
                 control={form.control}
-                shouldUnregister
                 rules={{ required: "Flight type is required" }}
-                render={({ field }) => {
-                  console.log(field);
+                render={({ field }) => (
+                  <div className="flex items-center space-x-4">
+                    <label className="flex items-center space-x-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        value="roundtrip"
+                        checked={field.value === "roundtrip"}
+                        onChange={() => field.onChange("roundtrip")}
+                        className="hidden peer"
+                      />
+                      <span className="w-5 h-5 border-2 border-black rounded-full flex items-center justify-center peer-checked:border-black">
+                        <div
+                          style={{
+                            display:
+                              field.value === "roundtrip" ? "block" : "none",
+                          }}
+                          className="w-2 h-2 bg-black rounded-full peer-checked:block"
+                        ></div>
+                      </span>
+                      <span>Roundtrip</span>
+                    </label>
 
-                  return (
-                    <>
-                      <RadioGroup
-                        {...field}
-                        className="flex justify-start sm-max:justify-center items-center"
-                      >
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem
-                            className="w-5 h-5"
-                            value="roundtrip"
-                            id="roundtrip"
-                            checked={field.value === "roundtrip"}
-                            onClick={() => field.onChange("roundtrip")}
-                          />
-                          <Label htmlFor="roundtrip">Roundtrip</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem
-                            className="w-5 h-5"
-                            value="one-way"
-                            id="one-way"
-                            checked={field.value === "one-way"}
-                            onClick={() => {
-                              field.onChange("one-way");
-                              if (calendar?.date === "to") {
-                                setSelectedDate(null);
-                              }
-                            }}
-                          />
-                          <Label htmlFor="one-way">One-way</Label>
-                        </div>
-                        {form.formState.errors.tripType && (
-                          <span className="text-red-500 m-0 p-0 text-sm">
-                            {typeof form.formState.errors.tripType?.message ===
-                              "string" &&
-                              form.formState.errors.tripType.message}
-                          </span>
-                        )}
-                      </RadioGroup>
-                    </>
-                  );
-                }}
+                    <label className="flex items-center space-x-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        value="one-way"
+                        checked={field.value === "one-way"}
+                        onChange={() => field.onChange("one-way")}
+                        className="hidden peer"
+                      />
+                      <span className="w-5 h-5 border-2 border-black rounded-full flex items-center justify-center peer-checked:border-black">
+                        <div
+                          style={{
+                            display:
+                              field.value === "one-way" ? "block" : "none",
+                          }}
+                          className="w-2 h-2 bg-black rounded-full peer-checked:block"
+                        ></div>
+                      </span>
+                      <span>One-way</span>
+                    </label>
+                  </div>
+                )}
               />
               <Button
                 type="submit"

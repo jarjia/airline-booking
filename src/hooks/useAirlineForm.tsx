@@ -12,7 +12,9 @@ const useAirlineForm = ({ destinations }: AirlineFormProps) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [bookingData, setBookingData] = useState<BookingData | null>(null);
   const form = useForm<FinalData>({
-    defaultValues: undefined,
+    defaultValues: {
+      tripType: "roundtrip",
+    },
   });
 
   // Reset selected date when date picker changes
