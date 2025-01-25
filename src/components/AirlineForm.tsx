@@ -34,19 +34,28 @@ export const AirlineForm = ({ destinations }: AirlineFormProps) => {
     <Bounded>
       <>
         {bookingData && (
-          <div className="absolute flex flex-col items-center justify-center top-1/4 left-1/4 rounded-lg p-4 w-1/2 h-1/2 z-[20] bg-white shadow-2xl">
-            <div className="flex flex-col gap-2">
-              <p>Booking Id: {bookingData.bookingId}</p>
-              <p>Status: {bookingData.status}</p>
-              <p>
-                TimeStamp:{" "}
-                {new Date(bookingData.timestamp).toLocaleDateString("en-GB")}
-              </p>
-              <Button variant="secondary" onClick={() => setBookingData(null)}>
-                Close
-              </Button>
+          <>
+            <div className="absolute flex flex-col items-center justify-center tiny-max:w-full tiny-max:left-0 top-1/4 left-1/4 rounded-lg p-4 w-1/2 h-1/2 z-[20] bg-white shadow-2xl">
+              <div className="flex flex-col gap-2">
+                <p>Booking Id: {bookingData.bookingId}</p>
+                <p>Status: {bookingData.status}</p>
+                <p>
+                  TimeStamp:{" "}
+                  {new Date(bookingData.timestamp).toLocaleDateString("en-GB")}
+                </p>
+                <Button
+                  variant="secondary"
+                  onClick={() => setBookingData(null)}
+                >
+                  Close
+                </Button>
+              </div>
             </div>
-          </div>
+            <div
+              onClick={() => setBookingData(null)}
+              className="fixed top-0 left-0 bg-black bg-opacity-40 w-screen h-screen z-[19]"
+            ></div>
+          </>
         )}
         <FormProvider {...form}>
           <form
@@ -72,10 +81,7 @@ export const AirlineForm = ({ destinations }: AirlineFormProps) => {
                   handleDatePicker={handleDatePicker}
                 />
               </div>
-              <div
-                className="sm-max:flex justify-center items-center hidden w-full"
-                style={{ height: calendar ? "auto" : 0 }}
-              >
+              <div className="sm-max:flex justify-center items-center hidden w-full">
                 <Calendar
                   calendar={calendar}
                   handleCalendarSelect={handleCalendarSelect}
