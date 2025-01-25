@@ -63,11 +63,11 @@ export const AirlineForm = ({ destinations }: AirlineFormProps) => {
             className="grid grid-cols-2 gap-2 sm-max:grid-cols-1 items-center"
           >
             <div className="flex flex-col gap-10">
-              <div className="flex justify-between tiny-max:items-center tiny-max:flex-col tiny-max:gap-6 gap-1">
+              <div className="flex justify-between sm-max:justify-around tiny-max:justify-center tiny-max:items-center tiny-max:flex-col tiny-max:gap-6 gap-1">
                 <Dropdown destinations={destinations} location="origin" />
                 <Dropdown destinations={destinations} location="destination" />
               </div>
-              <div className="flex justify-between tiny-max:items-center tiny-max:flex-col tiny-max:gap-6 gap-1">
+              <div className="flex justify-between sm-max:justify-around tiny-max:justify-center tiny-max:items-center tiny-max:flex-col tiny-max:gap-6 gap-1">
                 <DatePicker
                   date="from"
                   location="origin"
