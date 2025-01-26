@@ -24,7 +24,6 @@ export const AirlineForm = ({ destinations }: AirlineFormProps) => {
     bookingData,
     onSubmit,
     setBookingData,
-    setSelectedDate,
     handleCalendarSelect,
     handleDatePicker,
     handleDisabledWeekDays,

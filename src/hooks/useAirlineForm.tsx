@@ -2,7 +2,7 @@ import { AirlineFormProps } from "@/components/AirlineForm";
 import { BookingData, DatePickerData, FinalData } from "@/types/types";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm, useWatch } from "react-hook-form";
 import { book } from "@/actions/book";
 
 const useAirlineForm = ({ destinations }: AirlineFormProps) => {
@@ -16,11 +16,16 @@ const useAirlineForm = ({ destinations }: AirlineFormProps) => {
       tripType: "roundtrip",
     },
   });
+  const tripType = useWatch({ name: "tripType", control: form.control });
 
   // Reset selected date when date picker changes
   useEffect(() => {
     setSelectedDate(null);
   }, [calendar?.date]);
+
+  useEffect(() => {
+    if (tripType === "one-way") setCalendar(null);
+  }, [tripType]);
 
   const onSubmit: SubmitHandler<FinalData> = async (data) => {
     // Process data before sending to the server action

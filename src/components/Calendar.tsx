@@ -17,7 +17,9 @@ const Calendar = ({
   return (
     <div
       className={`${
-        calendar ? "scale-100 sm-max:h-auto" : "scale-0 sm-max:h-0"
+        calendar
+          ? "scale-100 sm-max:h-auto sm-max:opacity-100"
+          : "scale-0 sm-max:h-0 sm-max:opacity-0"
       } flex flex-col justify-center items-center transition-transform duration-200`}
     >
       {calendar && (
