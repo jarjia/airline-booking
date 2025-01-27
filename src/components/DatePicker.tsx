@@ -94,7 +94,10 @@ const DatePicker = ({
           type="text"
           placeholder="Select date"
           {...register(date, {
-            required: `${capitalizeFirstLetter(date)} date is required`,
+            required: {
+              value: dateDisabled ? false : true,
+              message: `${capitalizeFirstLetter(date)} date is required`,
+            },
             validate: (value) => {
               if (tripType !== "one-way") {
                 const parsedDate = parseDate(value, "/");

@@ -11,11 +11,7 @@ const useAirlineForm = ({ destinations }: AirlineFormProps) => {
   const [calendar, setCalendar] = useState<DatePickerData | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [bookingData, setBookingData] = useState<BookingData | null>(null);
-  const form = useForm<FinalData>({
-    defaultValues: {
-      tripType: "roundtrip",
-    },
-  });
+  const form = useForm<FinalData>();
   const tripType = useWatch({ name: "tripType", control: form.control });
 
   // Reset selected date when date picker changes
@@ -29,20 +25,21 @@ const useAirlineForm = ({ destinations }: AirlineFormProps) => {
 
   const onSubmit: SubmitHandler<FinalData> = async (data) => {
     // Process data before sending to the server action
+    const newData = { ...data };
     if (data.tripType === "one-way") {
-      delete data.to;
+      delete newData.to;
     }
 
     if (data.from) {
-      data.from = data.from.replace(/\//g, "-");
+      newData.from = data.from.replace(/\//g, "-");
     }
 
     if (data.to) {
-      data.to = data.to.replace(/\//g, "-");
+      newData.to = data.to.replace(/\//g, "-");
     }
 
     // Send data to server action
-    const res = await book(data);
+    const res = await book(newData);
     setBookingData(res.data);
     setCalendar(null);
     form.reset();
@@ -98,7 +95,9 @@ const useAirlineForm = ({ destinations }: AirlineFormProps) => {
     calendar,
     selectedDate,
     bookingData,
+    tripType,
     setBookingData,
+    setValue: form.setValue,
     handleDatePicker,
     handleDisabledWeekDays,
     handleCalendarSelect,

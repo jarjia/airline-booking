@@ -22,7 +22,9 @@ export const AirlineForm = ({ destinations }: AirlineFormProps) => {
     calendar,
     selectedDate,
     bookingData,
+    tripType,
     onSubmit,
+    setValue,
     setBookingData,
     handleCalendarSelect,
     handleDatePicker,
@@ -88,54 +90,54 @@ export const AirlineForm = ({ destinations }: AirlineFormProps) => {
                   handleDisabledWeekDays={handleDisabledWeekDays}
                 />
               </div>
-              <Controller
+              <div className="flex items-center space-x-4">
+                <label className="flex items-center space-x-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    value="roundtrip"
+                    name="tripType"
+                    onClick={() => setValue("tripType", "roundtrip")}
+                    className="hidden peer"
+                  />
+                  <span className="w-5 h-5 border-2 border-black rounded-full flex items-center justify-center peer-checked:border-black">
+                    <div
+                      style={{
+                        display: tripType === "roundtrip" ? "block" : "none",
+                      }}
+                      className="w-2 h-2 bg-black rounded-full peer-checked:block"
+                    ></div>
+                  </span>
+                  <span>Roundtrip</span>
+                </label>
+
+                <label className="flex items-center space-x-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    value="one-way"
+                    name="tripType"
+                    onClick={() => setValue("tripType", "one-way")}
+                    className="hidden peer"
+                  />
+                  <span className="w-5 h-5 border-2 border-black rounded-full flex items-center justify-center peer-checked:border-black">
+                    <div
+                      style={{
+                        display: tripType === "one-way" ? "block" : "none",
+                      }}
+                      className="w-2 h-2 bg-black rounded-full peer-checked:block"
+                    ></div>
+                  </span>
+                  <span>One-way</span>
+                </label>
+              </div>
+              {/* <Controller
                 name="tripType"
                 control={form.control}
+                defaultValue="roundtrip"
                 rules={{ required: "Flight type is required" }}
                 render={({ field }) => (
-                  <div className="flex items-center space-x-4">
-                    <label className="flex items-center space-x-2 cursor-pointer">
-                      <input
-                        type="radio"
-                        value="roundtrip"
-                        checked={field.value === "roundtrip"}
-                        onChange={() => field.onChange("roundtrip")}
-                        className="hidden peer"
-                      />
-                      <span className="w-5 h-5 border-2 border-black rounded-full flex items-center justify-center peer-checked:border-black">
-                        <div
-                          style={{
-                            display:
-                              field.value === "roundtrip" ? "block" : "none",
-                          }}
-                          className="w-2 h-2 bg-black rounded-full peer-checked:block"
-                        ></div>
-                      </span>
-                      <span>Roundtrip</span>
-                    </label>
-
-                    <label className="flex items-center space-x-2 cursor-pointer">
-                      <input
-                        type="radio"
-                        value="one-way"
-                        checked={field.value === "one-way"}
-                        onChange={() => field.onChange("one-way")}
-                        className="hidden peer"
-                      />
-                      <span className="w-5 h-5 border-2 border-black rounded-full flex items-center justify-center peer-checked:border-black">
-                        <div
-                          style={{
-                            display:
-                              field.value === "one-way" ? "block" : "none",
-                          }}
-                          className="w-2 h-2 bg-black rounded-full peer-checked:block"
-                        ></div>
-                      </span>
-                      <span>One-way</span>
-                    </label>
-                  </div>
+                
                 )}
-              />
+              /> */}
               <Button
                 type="submit"
                 variant="default"
