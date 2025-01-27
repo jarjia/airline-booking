@@ -129,15 +129,6 @@ export const AirlineForm = ({ destinations }: AirlineFormProps) => {
                   <span>One-way</span>
                 </label>
               </div>
-              {/* <Controller
-                name="tripType"
-                control={form.control}
-                defaultValue="roundtrip"
-                rules={{ required: "Flight type is required" }}
-                render={({ field }) => (
-                
-                )}
-              /> */}
               <Button
                 type="submit"
                 variant="default"
